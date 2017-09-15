@@ -1,9 +1,12 @@
 import React from 'react';
+import AppView from './AppView'
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentSubreddit: 'enter here',
+      currentQuery: 'enter here',
+      currentSubreddit: '',
       firstClick: false
     };
 
@@ -12,40 +15,46 @@ class App extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
+  handleChange(e) {
     this.setState({
-      currentSubreddit: event.target.value
+      currentQuery: e.target.value
     })
   }
 
-  handleSubmit() {
-    console.log('hello')
+  handleSubmit(e) {
+    this.props.search(this.state.currentQuery, (data) => {
+      console.log(data)
+    });
+    this.setState({
+      currentSubreddit: this.state.currentQuery
+    })
+    e.preventDefault();
   }
 
   setBlank() {
     if (!this.state.firstClick) {
       this.setState({
-        currentSubreddit: ''
+        currentQuery: '',
+        firstClick: true
       });
     }
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          <input
-            type="text"
-            value={this.state.currentSubreddit}
-            onChange={this.handleChange}
-            onClick={this.setBlank}/>
-        </label>
-        <input type="submit" value="Submit" />
-        <div>
-          <br></br>
-          {this.state.currentSubreddit}
-        </div>
-      </form>
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            <input
+              type="text"
+              value={this.state.currentQuery}
+              onChange={this.handleChange}
+              onClick={this.setBlank}/>
+            </label>
+          <input type="submit" value="Submit" />
+        </form>
+        <AppView subreddit={this.state.currentSubreddit} />
+      </div>
     );
   }
 }
