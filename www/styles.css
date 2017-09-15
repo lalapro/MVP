@@ -5,10 +5,19 @@ h1 {
 }
 
 body {
-  background-color: black
+  background-color: black;
+  font: white;
 }
 
 p {
   color: white;
   font: verdana;
+}
+
+label {
+  color: white;
+}
+
+div {
+  color: white;
 }

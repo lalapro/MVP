@@ -7,4 +7,5 @@ node_modules
 ## Compiled files ##
 compiled/
 
-## API keys ##
+## WEBPACK ##
+www/bundle.js
