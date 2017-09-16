@@ -7,6 +7,6 @@ import search from './ajax';
 document.addEventListener('DOMContentLoaded', function() {
   ReactDOM.render(
     <App search={search}/>,
-    document.getElementById('mount')
+    document.getElementById('app')
   );
 });

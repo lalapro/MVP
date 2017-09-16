@@ -1,17 +1,81 @@
-h1 {
+@import url("http://netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap-glyphicons.css");
+
+header {
   font-size: xx-large;
   color: white;
-  font: verdana
+  font: verdana;
+  position: fixed;
+  height: 200px;
+  width: 100%;
+  border: 1px solid red;
+  z-index: 50;
+  top: 0;
+  opacity: 20%;
+  background-color: transparent;
+
+}
+
+header2 {
+  position: fixed;
+  right: 300px;
+  top: 10px;
+  z-index: 60;
 }
 
 body {
   background-color: grey;
   font: white;
+  top: 500px;
 }
 
 p {
   color: white;
   font: verdana;
+  position: fixed;
+  top: 0px;
+}
+
+.tabs {
+  color: white;
+  font: verdana;
+  /*position: fixed;*/
+  top: 25px;
+  left: 700px;
+  text-align: left;
+  z-index: 60;
+}
+
+.outer {
+  position: relative;
+  height: auto;
+  top: 150px;
+}
+
+.inner {
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 128px;
+  bottom: 0;
+  height: 100%;
+  background: blue;
+  z-index: 30;
+}
+
+.container {
+  position: fixed;
+  top: 100px;
+  left: 20px;
+  z-index: 30;
+}
+
+button {
+  border: 0;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 10px;
 }
 
 label {
@@ -22,9 +86,26 @@ div {
   color: white;
 }
 
-.title {
+.subReddit {
   color: white;
   font-size: xx-large;
+  /*margin: auto;*/
+  /*align-content: center;*/
+  right: 10px;
+  padding: 10px;
+  text-align: left;
   position: absolute;
-  right: 50%;
+}
+
+.individual{
+  position: relative;
+  float: left;
+  top: 100px;
+  max-width:350px;
+  max-height:350px;
+  width: auto;
+  height: auto;
+  padding: 15px;
+  overflow: auto;
+  z-index: 0;
 }

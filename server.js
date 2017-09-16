@@ -2,11 +2,13 @@ const express = require('express');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpack = require('webpack');
 const webpackConfig = require('./webpack.config.js');
-const app = express();
-
 const compiler = webpack(webpackConfig);
+const bodyParser = require('body-parser');
+const db = require('./database')
 
+const app = express();
 app.use(express.static(__dirname + '/www'));
+app.use(bodyParser.json());
 
 app.use(webpackDevMiddleware(compiler, {
   hot: true,
@@ -16,10 +18,25 @@ app.use(webpackDevMiddleware(compiler, {
     colors: true,
   },
   historyApiFallback: true,
-}))
+}));
 
-const server = app.listen(3000, function() {
-  const host = server.address().address;
-  const port = server.address().port;
-  console.log('MVP app listening on ', host, port);
+
+app.get('/100', (req, res) => {
+  db.dig((imgs) => {
+    res.send(imgs);
+  })
+});
+
+
+app.post('/100', function(req, res) {
+  console.log('HIIIIIIIIIIIIII')
+  db.save(req.body)
+  res.send('worked!')
+});
+
+
+
+port = 3000;
+app.listen(port, function() {
+  console.log(`listening on port ${port}`);
 })
