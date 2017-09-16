@@ -30,7 +30,7 @@ class Pics extends React.Component {
   }
 
   render () {
-    var display = this.state.favorite ? "http://barkpost-assets.s3.amazonaws.com/wp-content/uploads/2013/11/3dDoge.gif" : this.props.pic
+    var display = this.state.favorite ? "https://barkpost-assets.s3.amazonaws.com/wp-content/uploads/2013/11/3dDoge.gif" : this.props.pic
     return (
       <div
         className="block"
@@ -47,7 +47,3 @@ class Pics extends React.Component {
 }
 
 export default Pics;
-
-{/* <img
-  className="behind"
-  src="http://barkpost-assets.s3.amazonaws.com/wp-content/uploads/2013/11/3dDoge.gif"></img> */}
