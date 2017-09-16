@@ -1,7 +1,6 @@
 import React from 'react';
 import Pics from './Pics';
 import TitleView from './TitleView';
-import GameView from './GameView';
 import axios from 'axios';
 import Helpers from './Helpers';
 
@@ -86,7 +85,8 @@ class App extends React.Component {
         console.log(filteredData)
         this.setState({
           currentAlbum: filteredData,
-          currentSubreddit: this.state.currentQuery
+          currentSubreddit: this.state.currentQuery,
+          gameState: false
         });
       });
     }
@@ -123,6 +123,7 @@ class App extends React.Component {
 
   save(pic) {
     if(this.state.gameState) {
+      console.log('hi')
       let scores = this.state.currentAlbum.map((pic) => {
         return pic.score
       }).sort();
@@ -130,13 +131,15 @@ class App extends React.Component {
         this.setState({
           currentAlbum: [{
             link: 'https://media.giphy.com/media/EndO2bvE3adMc/giphy.gif'
-          }]
+          }],
+            gameState: false
         })
       } else {
         this.setState({
           currentAlbum: [{
             link: 'https://media.giphy.com/media/XGUrip9FockVy/giphy.gif'
-          }]
+          }],
+            gameState: false
         })
       }
     } else {
@@ -212,14 +215,13 @@ class App extends React.Component {
                       GIF ONLY
                     </button>
                 </div>
-                <div className="imgSize">
-                  <button onClick={this.handleSize}>small</button>
-                  <button onClick={this.handleSize}>medium</button>
-                  <button onClick={this.handleSize}>large</button>
-                  <button onClick={this.handleSize}>original</button>
-                </div>
-
             </form>
+            <div className="imgSize">
+              <button onClick={this.handleSize}>small</button>
+              <button onClick={this.handleSize}>medium</button>
+              <button onClick={this.handleSize}>large</button>
+              <button onClick={this.handleSize}>original</button>
+            </div>
               <div>
                 <TitleView
                   title={this.state.currentTitle}
