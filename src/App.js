@@ -1,5 +1,6 @@
 import React from 'react';
-import Pics from './Pics'
+import Pics from './Pics';
+import TitleView from './TitleView';
 
 class App extends React.Component {
   constructor(props) {
@@ -8,11 +9,16 @@ class App extends React.Component {
       currentQuery: 'enter here',
       currentSubreddit: '',
       currentAlbum: [],
+      currentTitle: '',
+      currentViews: '',
+      currentScore: '',
       firstClick: false,
       gifOnly: false,
       buttonColor: {
         backgroundColor: 'grey'
-      }
+      },
+      size: {maxWidth: '550px',maxHeight: '550px'},
+      saves: []
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -20,6 +26,42 @@ class App extends React.Component {
     this.handleFilter = this.handleFilter.bind(this);
     this.gifToggle = this.gifToggle.bind(this);
     this.filter = this.filter.bind(this);
+    this.handleSize = this.handleSize.bind(this);
+    this.hoverHand = this.hoverHand.bind(this);
+    this.save = this.save.bind(this);
+  }
+
+  hoverHand(pic) {
+    this.setState({
+      currentTitle: pic.title,
+      currentViews: pic.views,
+      currentScore: pic.score,
+      currentSubreddit: pic.sub
+    })
+  }
+
+  handleSize(e) {
+    var sizes = [{maxWidth: '150px',maxHeight: '150px'},
+                 {maxWidth: '350px',maxHeight: '350px'},
+                 {maxWidth: '550px',maxHeight: '550px'},
+                 {maxWidth: '80%', maxHeight: '80%'}]
+
+    var choice = e.target.innerHTML;
+    let newSize;
+
+    if(choice === 'small') {
+      newSize = sizes[0];
+    } else if (choice === 'medium') {
+      newSize = sizes[1];
+    } else if (choice === 'large'){
+      newSize = sizes[2];
+    } else {
+      newSize = sizes[3];
+    }
+
+    this.setState({
+      size: newSize
+    })
   }
 
   handleChange(e) {
@@ -39,7 +81,6 @@ class App extends React.Component {
 
     e.preventDefault();
   }
-
 
   setBlank() {
     if (!this.state.firstClick) {
@@ -87,10 +128,18 @@ class App extends React.Component {
     return filter;
   }
 
+  save(pic) {
+    this.state.saves.push(pic)
+  }
+
+  download() {
+    
+  }
+
   render() {
     return (
       <div>
-        <header>SubredditImgur
+        <header>TumblrRedditImgurPinterestYoutube
           <div>Search your subreddit! </div>
           <div className="container">
             <form onSubmit={this.handleFilter}>
@@ -112,14 +161,31 @@ class App extends React.Component {
                   >
                     GIF ONLY
                   </button>
+                  <button onClick={this.handleSize}>small</button>
+                  <button onClick={this.handleSize}>medium</button>
+                  <button onClick={this.handleSize}>large</button>
+                  <button onClick={this.handleSize}>original</button>
+
                 </form>
                 <div className="subReddit">
                   currently browsing ... /r/{this.state.currentSubreddit}
                 </div>
+                <div>
+                  <TitleView
+                    title={this.state.currentTitle}
+                    views={this.state.currentViews}
+                    score={this.state.currentScore}
+                    sub={this.state.currentSubreddit}
+                  />
+                </div>
+                <div className ="saves">
+                  pictures saved: {this.state.saves.length}
+                </div>
+                <button className="download" onClick={this.download}>Download</button>
               </div>
         </header>
 
-          <p className="outer">
+          <span className="outer">
             {this.state.currentAlbum.map((pic, idx) => {
               return (
                 <Pics
@@ -128,11 +194,14 @@ class App extends React.Component {
                   views={pic.views}
                   score={pic.score}
                   sub={this.state.currentSubreddit}
-                  index={idx}
+                  size={this.state.size}
+                  key={idx}
+                  hoverHand={this.hoverHand}
+                  save={this.save}
                 />
               )
             })}
-          </p>
+          </span>
       </div>
     );
   }

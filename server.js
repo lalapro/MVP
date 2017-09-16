@@ -20,11 +20,16 @@ app.use(webpackDevMiddleware(compiler, {
   historyApiFallback: true,
 }));
 
+// app.use need routes
+
+
+
 
 app.get('/100', (req, res) => {
-  db.dig((imgs) => {
-    res.send(imgs);
-  })
+  console.log(req.body)
+  // db.dig((imgs) => {
+  //   res.send(imgs);
+  // })
 });
 
 

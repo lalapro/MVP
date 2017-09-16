@@ -16,8 +16,9 @@ header {
 }
 
 header2 {
+  font-size: medium;
   position: fixed;
-  right: 300px;
+  left: 600px;
   top: 10px;
   z-index: 60;
 }
@@ -33,6 +34,13 @@ p {
   font: verdana;
   position: fixed;
   top: 0px;
+}
+
+.saves {
+  color:blue;
+  position: fixed;
+  right: 0;
+  /*bottom: 300;*/
 }
 
 .tabs {
@@ -78,6 +86,11 @@ button {
   font-size: 10px;
 }
 
+.download{
+  color: white;
+  background-color: green
+}
+
 label {
   color: white;
 }
@@ -101,8 +114,6 @@ div {
   position: relative;
   float: left;
   top: 100px;
-  max-width:350px;
-  max-height:350px;
   width: auto;
   height: auto;
   padding: 15px;
