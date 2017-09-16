@@ -25,18 +25,20 @@ app.use(webpackDevMiddleware(compiler, {
 
 
 
-app.get('/100', (req, res) => {
-  console.log(req.body)
-  // db.dig((imgs) => {
-  //   res.send(imgs);
-  // })
+app.get('/database', (req, res) => {
+  db.dig((imgs) => {
+    res.send(imgs);
+  })
 });
 
 
-app.post('/100', function(req, res) {
-  console.log('HIIIIIIIIIIIIII')
-  db.save(req.body)
-  res.send('worked!')
+app.post('/downloads', function(req, res) {
+  console.log('server', req.body)
+  data = req.body.pics;
+  data.forEach((pic) => {
+    db.save(pic);
+  });
+  res.send('pics saved!!~~')
 });
 
 

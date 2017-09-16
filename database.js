@@ -4,24 +4,23 @@ mongoose.connect('mongodb://lalapo:123@ds135594.mlab.com:35594/hackreactormvp', 
 
 
 let repoSchema = mongoose.Schema({
-  id: String,
   title: String,
-  link: String,
   views: Number,
   score: Number,
-  nsfw: Boolean
+  sub: String,
+  link: String
 });
 
 let MyAlbum = mongoose.model('MyAlbum', repoSchema);
 
 let save = (img) => {
+  console.log('database', img)
   MyAlbum.create({
-    id: img.id,
     title: img.title,
-    link: img.link,
     views: img.views,
     score: img.score,
-    nsfw: img.nsfw
+    sub: img.sub,
+    link: img.pic,
   })
 }
 
@@ -33,5 +32,12 @@ let dig = (callback) => {
 
 module.exports.save = save;
 module.exports.dig = dig;
+
+// { pic: 'https://i.imgur.com/vrilVVO.jpg',
+//   title: '[PIC] Louise and Tash playing their favorite game, "dentist."',
+//   views: 1983,
+//   score: 427,
+//   sub: 'dogs',
+//   size: { maxWidth: '150px', maxHeight: '150px' } }
 
 // export default save;

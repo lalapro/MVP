@@ -1,10 +1,9 @@
 import React from 'react';
-import TitleView from './TitleView';
 // import Heart from './heart.png'
 
 
 
-class Pics extends React.Component {
+class GameView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,14 +18,10 @@ class Pics extends React.Component {
   }
 
   handleSave() {
-    if(this.props.gameState) {
-      this.props.save(this.props)
-    } else {
-      this.props.save(this.props)
-      this.setState({
-        favorite: !this.state.favorite
-      })
-    }
+    this.props.save(this.props)
+    this.setState({
+      favorite: !this.state.favorite
+    })
   }
 
   render () {
@@ -46,4 +41,4 @@ class Pics extends React.Component {
   }
 }
 
-export default Pics;
+export default GameView;
