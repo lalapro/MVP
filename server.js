@@ -22,6 +22,7 @@ app.use(webpackDevMiddleware(compiler, {
 
 // app.use need routes
 
+app.set('port', (process.env.PORT || 3000));
 
 
 
@@ -43,7 +44,5 @@ app.post('/downloads', function(req, res) {
 
 
 
-port = 3000;
-app.listen(port, function() {
-  console.log(`listening on port ${port}`);
-})
+
+app.listen(app.get('port'))
